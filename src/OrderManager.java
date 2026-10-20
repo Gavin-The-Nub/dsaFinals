@@ -11,6 +11,9 @@ import java.util.List;
  * 3. Insertion Sort on completed orders by total amount
  */
 public class OrderManager {
+    public static final int MIN_QUANTITY = 1;
+    public static final int MAX_QUANTITY = 10;
+
     private final OrderQueue pendingQueue;
     private final List<Order> servedOrders;
     private final List<MenuItem> menu;
@@ -60,9 +63,11 @@ public class OrderManager {
      */
     public Order placeOrder(String customerName, int menuItemId, int quantity) {
         MenuItem item = getMenuItemById(menuItemId);
-        if (item == null || quantity <= 0) {
+        if (customerName == null || customerName.trim().isEmpty()
+                || item == null || quantity < MIN_QUANTITY || quantity > MAX_QUANTITY) {
             return null;
         }
+        customerName = customerName.trim();
 
         double totalAmount = item.getPrice() * quantity;
         String timestamp = LocalDateTime.now().format(timeFormatter);
@@ -70,6 +75,14 @@ public class OrderManager {
         Order newOrder = new Order(nextOrderId++, customerName, item.getName(), quantity, totalAmount, "PENDING", timestamp);
         pendingQueue.enqueue(newOrder);
         return newOrder;
+    }
+
+    /**
+     * Returns the order at the front of the queue without removing it,
+     * or null if the queue is empty.
+     */
+    public Order peekNextOrder() {
+        return pendingQueue.peek();
     }
 
     /**

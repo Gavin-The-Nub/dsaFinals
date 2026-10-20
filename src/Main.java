@@ -42,15 +42,17 @@ public class Main {
                 case 5 -> handleViewCompletedOrdersSorted();
                 case 6 -> handleViewMenu();
                 case 7 -> {
-                    System.out.println("Thank you for using the Canteen Order Queue Management System!");
-                    running = false;
+                    if (confirm("Are you sure you want to exit?")) {
+                        System.out.println("Thank you for using the Canteen Order Queue Management System!");
+                        running = false;
+                    }
                 }
             }
 
             if (running) {
                 System.out.println();
                 System.out.print("Press ENTER to return to main menu...");
-                scanner.nextLine();
+                readLine();
             }
         }
     }
@@ -71,10 +73,10 @@ public class Main {
     private static void handlePlaceOrder() {
         System.out.println("--- [1] PLACE NEW ORDER ---");
         System.out.print("Enter Customer Name: ");
-        String customerName = scanner.nextLine().trim();
+        String customerName = readLine().trim();
         while (customerName.isEmpty()) {
             System.out.print("Customer name cannot be empty. Please enter name: ");
-            customerName = scanner.nextLine().trim();
+            customerName = readLine().trim();
         }
 
         System.out.println("\n--- CANTEEN MENU ---");
@@ -86,8 +88,8 @@ public class Main {
         System.out.print("\nSelect Menu Item Number (1-" + menu.size() + "): ");
         int itemChoice = readIntChoice(1, menu.size());
 
-        System.out.print("Enter Quantity (1-50): ");
-        int quantity = readIntChoice(1, 50);
+        System.out.print("Enter Quantity (" + OrderManager.MIN_QUANTITY + "-" + OrderManager.MAX_QUANTITY + "): ");
+        int quantity = readIntChoice(OrderManager.MIN_QUANTITY, OrderManager.MAX_QUANTITY);
 
         Order newOrder = manager.placeOrder(customerName, itemChoice, quantity);
         if (newOrder != null) {
@@ -111,20 +113,30 @@ public class Main {
      */
     private static void handleServeNextOrder() {
         System.out.println("--- [2] SERVE NEXT ORDER ---");
-        Order served = manager.serveNextOrder();
-        if (served == null) {
-            System.out.println("ℹ The queue is currently empty. No pending orders to serve.");
-        } else {
-            System.out.println(">>> ORDER SERVED SUCCESSFULLY (Dequeued from Queue) <<<");
-            System.out.println("+-------------------------------------------------------+");
-            System.out.printf("| Order ID       : #%-36d |%n", served.getOrderId());
-            System.out.printf("| Customer       : %-38s |%n", truncate(served.getCustomerName(), 38));
-            System.out.printf("| Item           : %-38s |%n", truncate(served.getItemName(), 38));
-            System.out.printf("| Quantity       : %-38d |%n", served.getQuantity());
-            System.out.printf("| Total Paid     : ₱%-37.2f |%n", served.getTotalAmount());
-            System.out.printf("| Status         : %-38s |%n", served.getStatus());
-            System.out.println("+-------------------------------------------------------+");
+        Order next = manager.peekNextOrder();
+        if (next == null) {
+            System.out.println("The queue is empty. No pending orders to serve.");
+            return;
         }
+
+        System.out.printf("Next in queue: Order #%d - %s (%s x%d, Total: ₱%.2f)%n",
+                next.getOrderId(), next.getCustomerName(), next.getItemName(),
+                next.getQuantity(), next.getTotalAmount());
+        if (!confirm("Serve this order?")) {
+            System.out.println("Serve cancelled. The queue is unchanged.");
+            return;
+        }
+
+        Order served = manager.serveNextOrder();
+        System.out.println(">>> ORDER SERVED SUCCESSFULLY (Dequeued from Queue) <<<");
+        System.out.println("+-------------------------------------------------------+");
+        System.out.printf("| Order ID       : #%-36d |%n", served.getOrderId());
+        System.out.printf("| Customer       : %-38s |%n", truncate(served.getCustomerName(), 38));
+        System.out.printf("| Item           : %-38s |%n", truncate(served.getItemName(), 38));
+        System.out.printf("| Quantity       : %-38d |%n", served.getQuantity());
+        System.out.printf("| Total Paid     : ₱%-37.2f |%n", served.getTotalAmount());
+        System.out.printf("| Status         : %-38s |%n", served.getStatus());
+        System.out.println("+-------------------------------------------------------+");
     }
 
     /**
@@ -134,7 +146,7 @@ public class Main {
     private static void handleSearchOrder() {
         System.out.println("--- [3] SEARCH ORDER BY ID (LINEAR SEARCH) ---");
         System.out.print("Enter Order ID to search (e.g. 1001): ");
-        int orderId = readInt();
+        int orderId = readIntChoice(1, Integer.MAX_VALUE);
 
         long startTime = System.nanoTime();
         Order found = manager.linearSearchOrder(orderId);
@@ -142,7 +154,7 @@ public class Main {
         double elapsedMicroseconds = (endTime - startTime) / 1000.0;
 
         if (found == null) {
-            System.out.printf("✗ Order #%d was NOT found in active queue or completed records.%n", orderId);
+            System.out.println("Order not found");
         } else {
             System.out.println(">>> ORDER FOUND VIA LINEAR SEARCH <<<");
             System.out.println("+-------------------------------------------------------+");
@@ -181,18 +193,12 @@ public class Main {
         System.out.println("--- [5] COMPLETED ORDERS SORTED BY AMOUNT (INSERTION SORT) ---");
         List<Order> completed = manager.getServedOrders();
         if (completed.isEmpty()) {
-            System.out.println("ℹ No completed orders yet. Serve some orders first!");
+            System.out.println("No served orders yet.");
             return;
         }
 
-        System.out.println("  [1] Sort from Highest to Lowest Amount (Descending)");
-        System.out.println("  [2] Sort from Lowest to Highest Amount (Ascending)");
-        System.out.print("Choose sorting order (1-2): ");
-        int sortChoice = readIntChoice(1, 2);
-        boolean descending = (sortChoice == 1);
-
         long startTime = System.nanoTime();
-        List<Order> sorted = manager.getServedOrdersSortedByAmount(descending);
+        List<Order> sorted = manager.getServedOrdersSortedByAmount(true);
         long endTime = System.nanoTime();
         double elapsedMicroseconds = (endTime - startTime) / 1000.0;
 
@@ -240,29 +246,50 @@ public class Main {
         return text.substring(0, max - 3) + "...";
     }
 
+    /**
+     * Reads one line; if input has ended (e.g. Ctrl+D / Ctrl+Z), exits cleanly instead of crashing.
+     */
+    private static String readLine() {
+        if (!scanner.hasNextLine()) {
+            System.out.println("\nInput closed. Exiting program.");
+            System.exit(0);
+        }
+        return scanner.nextLine();
+    }
+
+    /**
+     * Reads a whole number in [min, max]. Only plain digits are accepted, so letters,
+     * decimals, signs, and blank input are rejected with a short message and re-prompted.
+     */
     private static int readIntChoice(int min, int max) {
         while (true) {
-            try {
-                String line = scanner.nextLine().trim();
-                int val = Integer.parseInt(line);
-                if (val >= min && val <= max) {
-                    return val;
+            String line = readLine().trim();
+            if (line.matches("[0-9]+")) {
+                try {
+                    int val = Integer.parseInt(line);
+                    if (val >= min && val <= max) {
+                        return val;
+                    }
+                } catch (NumberFormatException e) {
+                    // too large for an int: falls through to the error message
                 }
-                System.out.printf("Please enter a number between %d and %d: ", min, max);
-            } catch (NumberFormatException e) {
-                System.out.printf("Invalid input. Please enter a number between %d and %d: ", min, max);
+            }
+            if (max == Integer.MAX_VALUE) {
+                System.out.print("Invalid input. Enter a valid number: ");
+            } else {
+                System.out.printf("Invalid input. Enter a number from %d to %d: ", min, max);
             }
         }
     }
 
-    private static int readInt() {
+    /** Asks a Y/N question and repeats until the answer is Y or N. */
+    private static boolean confirm(String question) {
         while (true) {
-            try {
-                String line = scanner.nextLine().trim();
-                return Integer.parseInt(line);
-            } catch (NumberFormatException e) {
-                System.out.print("Invalid input. Please enter a valid number: ");
-            }
+            System.out.print(question + " (Y/N): ");
+            String answer = readLine().trim();
+            if (answer.equalsIgnoreCase("Y")) return true;
+            if (answer.equalsIgnoreCase("N")) return false;
+            System.out.println("Invalid input. Enter Y or N.");
         }
     }
 }
