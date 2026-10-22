@@ -56,6 +56,14 @@ public class OrderManager {
     }
 
     /**
+     * A customer name must contain at least one letter, so blank names and
+     * names made only of digits (e.g. "123") are rejected.
+     */
+    public static boolean isValidCustomerName(String customerName) {
+        return customerName != null && customerName.matches(".*\\p{L}.*");
+    }
+
+    /**
      * Feature 1: Place Order
      * DSA Applied: Queue — Enqueue
      * Enqueues the newly created order into the pending FIFO queue.
@@ -63,7 +71,7 @@ public class OrderManager {
      */
     public Order placeOrder(String customerName, int menuItemId, int quantity) {
         MenuItem item = getMenuItemById(menuItemId);
-        if (customerName == null || customerName.trim().isEmpty()
+        if (!isValidCustomerName(customerName)
                 || item == null || quantity < MIN_QUANTITY || quantity > MAX_QUANTITY) {
             return null;
         }

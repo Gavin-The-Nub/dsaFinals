@@ -1,3 +1,7 @@
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,15 +21,20 @@ public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final OrderManager manager = new OrderManager();
 
+    // Receipt box layout: "| " + 14-char label + " : " + value + " |"
+    private static final int RECEIPT_VALUE_WIDTH = 36;
+    private static final String RECEIPT_BORDER = "+" + "-".repeat(RECEIPT_VALUE_WIDTH + 19) + "+";
+
     public static void main(String[] args) {
+        enableUtf8Output();
         boolean running = true;
         while (running) {
             printHeader();
-            System.out.println(" [1] Place Order (Queue Enqueue)");
-            System.out.println(" [2] Serve Next Order (Queue Dequeue)");
-            System.out.println(" [3] Search Order by ID (Linear Search)");
-            System.out.println(" [4] View Pending Orders (Queue Traversal)");
-            System.out.println(" [5] View Completed Orders Sorted by Amount (Insertion Sort)");
+            System.out.println(" [1] Place Order");
+            System.out.println(" [2] Serve Next Order");
+            System.out.println(" [3] Search Order by ID");
+            System.out.println(" [4] View Pending Orders");
+            System.out.println(" [5] View Completed Orders Sorted by Amount");
             System.out.println(" [6] View Canteen Menu");
             System.out.println(" [7] Exit");
             System.out.println("=========================================================================");
@@ -57,9 +66,27 @@ public class Main {
         }
     }
 
+    /**
+     * Windows consoles default to a code page without the peso sign (₱), which then prints as "?".
+     * Switch the console to UTF-8 (code page 65001) and make System.out write UTF-8.
+     */
+    private static void enableUtf8Output() {
+        if (System.getProperty("os.name", "").startsWith("Windows")) {
+            try {
+                new ProcessBuilder("cmd", "/c", "chcp 65001 >nul")
+                        .redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                        .redirectError(ProcessBuilder.Redirect.INHERIT)
+                        .start().waitFor();
+            } catch (Exception e) {
+                // not fatal: symbols may just display incorrectly
+            }
+        }
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out), true, StandardCharsets.UTF_8));
+    }
+
     private static void printHeader() {
         System.out.println("\n=========================================================================");
-        System.out.println("         CANTEEN ORDER QUEUE MANAGEMENT SYSTEM (DLSL - CITE)");
+        System.out.println("         CANTEEN ORDER QUEUE MANAGEMENT SYSTEM");
         System.out.println("=========================================================================");
         System.out.printf("  Pending Orders in Queue: %-4d |  Total Served Orders: %-4d%n",
                 manager.getPendingOrders().size(), manager.getServedOrders().size());
@@ -74,8 +101,12 @@ public class Main {
         System.out.println("--- [1] PLACE NEW ORDER ---");
         System.out.print("Enter Customer Name: ");
         String customerName = readLine().trim();
-        while (customerName.isEmpty()) {
-            System.out.print("Customer name cannot be empty. Please enter name: ");
+        while (!OrderManager.isValidCustomerName(customerName)) {
+            if (customerName.isEmpty()) {
+                System.out.print("Customer name cannot be empty. Please enter name: ");
+            } else {
+                System.out.print("Customer name must contain letters, not just numbers. Please enter name: ");
+            }
             customerName = readLine().trim();
         }
 
@@ -94,16 +125,16 @@ public class Main {
         Order newOrder = manager.placeOrder(customerName, itemChoice, quantity);
         if (newOrder != null) {
             System.out.println("\n>>> ORDER PLACED SUCCESSFULLY (Enqueued to Queue) <<<");
-            System.out.println("+-------------------------------------------------------+");
-            System.out.printf("| Order ID       : #%-36d |%n", newOrder.getOrderId());
-            System.out.printf("| Customer       : %-38s |%n", truncate(newOrder.getCustomerName(), 38));
-            System.out.printf("| Item           : %-38s |%n", truncate(newOrder.getItemName(), 38));
-            System.out.printf("| Quantity       : %-38d |%n", newOrder.getQuantity());
-            System.out.printf("| Total Amount   : ₱%-37.2f |%n", newOrder.getTotalAmount());
-            System.out.printf("| Status         : %-38s |%n", newOrder.getStatus());
-            System.out.printf("| Queue Position : %-38d |%n", manager.getPendingOrders().size());
-            System.out.printf("| Timestamp      : %-38s |%n", newOrder.getTimestamp());
-            System.out.println("+-------------------------------------------------------+");
+            System.out.println(RECEIPT_BORDER);
+            printReceiptRow("Order ID", "#" + newOrder.getOrderId());
+            printReceiptRow("Customer", newOrder.getCustomerName());
+            printReceiptRow("Item", newOrder.getItemName());
+            printReceiptRow("Quantity", String.valueOf(newOrder.getQuantity()));
+            printReceiptRow("Total Amount", peso(newOrder.getTotalAmount()));
+            printReceiptRow("Status", newOrder.getStatus());
+            printReceiptRow("Queue Position", String.valueOf(manager.getPendingOrders().size()));
+            printReceiptRow("Timestamp", newOrder.getTimestamp());
+            System.out.println(RECEIPT_BORDER);
         }
     }
 
@@ -129,14 +160,14 @@ public class Main {
 
         Order served = manager.serveNextOrder();
         System.out.println(">>> ORDER SERVED SUCCESSFULLY (Dequeued from Queue) <<<");
-        System.out.println("+-------------------------------------------------------+");
-        System.out.printf("| Order ID       : #%-36d |%n", served.getOrderId());
-        System.out.printf("| Customer       : %-38s |%n", truncate(served.getCustomerName(), 38));
-        System.out.printf("| Item           : %-38s |%n", truncate(served.getItemName(), 38));
-        System.out.printf("| Quantity       : %-38d |%n", served.getQuantity());
-        System.out.printf("| Total Paid     : ₱%-37.2f |%n", served.getTotalAmount());
-        System.out.printf("| Status         : %-38s |%n", served.getStatus());
-        System.out.println("+-------------------------------------------------------+");
+        System.out.println(RECEIPT_BORDER);
+        printReceiptRow("Order ID", "#" + served.getOrderId());
+        printReceiptRow("Customer", served.getCustomerName());
+        printReceiptRow("Item", served.getItemName());
+        printReceiptRow("Quantity", String.valueOf(served.getQuantity()));
+        printReceiptRow("Total Paid", peso(served.getTotalAmount()));
+        printReceiptRow("Status", served.getStatus());
+        System.out.println(RECEIPT_BORDER);
     }
 
     /**
@@ -157,15 +188,15 @@ public class Main {
             System.out.println("Order not found");
         } else {
             System.out.println(">>> ORDER FOUND VIA LINEAR SEARCH <<<");
-            System.out.println("+-------------------------------------------------------+");
-            System.out.printf("| Order ID       : #%-36d |%n", found.getOrderId());
-            System.out.printf("| Customer       : %-38s |%n", truncate(found.getCustomerName(), 38));
-            System.out.printf("| Item           : %-38s |%n", truncate(found.getItemName(), 38));
-            System.out.printf("| Quantity       : %-38d |%n", found.getQuantity());
-            System.out.printf("| Total Amount   : ₱%-37.2f |%n", found.getTotalAmount());
-            System.out.printf("| Current Status : %-38s |%n", found.getStatus());
-            System.out.printf("| Ordered At     : %-38s |%n", found.getTimestamp());
-            System.out.println("+-------------------------------------------------------+");
+            System.out.println(RECEIPT_BORDER);
+            printReceiptRow("Order ID", "#" + found.getOrderId());
+            printReceiptRow("Customer", found.getCustomerName());
+            printReceiptRow("Item", found.getItemName());
+            printReceiptRow("Quantity", String.valueOf(found.getQuantity()));
+            printReceiptRow("Total Amount", peso(found.getTotalAmount()));
+            printReceiptRow("Current Status", found.getStatus());
+            printReceiptRow("Ordered At", found.getTimestamp());
+            System.out.println(RECEIPT_BORDER);
             System.out.printf("Search Algorithm: Linear Search | Time elapsed: %.3f µs%n", elapsedMicroseconds);
         }
     }
@@ -238,6 +269,15 @@ public class Main {
                     o.getStatus());
         }
         System.out.println("-------------------------------------------------------------------------------------------------");
+    }
+
+    /** Prints one "| Label : value |" line of a receipt box; every row has the same width as RECEIPT_BORDER. */
+    private static void printReceiptRow(String label, String value) {
+        System.out.printf("| %-14s : %-" + RECEIPT_VALUE_WIDTH + "s |%n", label, truncate(value, RECEIPT_VALUE_WIDTH));
+    }
+
+    private static String peso(double amount) {
+        return String.format("₱%.2f", amount);
     }
 
     private static String truncate(String text, int max) {
