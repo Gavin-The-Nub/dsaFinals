@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1218" height="642" viewBox="0 0 1218 642"><defs>
+<marker id="aO" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M1,1.5 L15,8 L1,14.5" fill="none" stroke="#1f2937" stroke-width="1.6"/></marker>
+<marker id="dF" viewBox="0 0 24 14" refX="23" refY="7" markerWidth="24" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M1,7 L12,1 L23,7 L12,13 Z" fill="#1f2937" stroke="#1f2937" stroke-width="1.2"/></marker>
+<marker id="dH" viewBox="0 0 24 14" refX="23" refY="7" markerWidth="24" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M1,7 L12,1 L23,7 L12,13 Z" fill="#ffffff" stroke="#1f2937" stroke-width="1.2"/></marker>
+</defs><rect width="1218" height="642" fill="#ffffff"/>
+<path d="M678,125 L908,125" fill="none" stroke="#1f2937" stroke-width="1.6" marker-start="url(#dF)" marker-end="url(#aO)"/>
+<text x="898" y="115" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">-manager</text>
+<text x="898" y="147" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">1</text>
+<path d="M678,335 L908,335" fill="none" stroke="#1f2937" stroke-width="1.6" stroke-dasharray="8,6" marker-end="url(#aO)"/>
+<text x="793" y="325" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827" font-style="italic">«use»</text>
+<path d="M678,505 L908,505" fill="none" stroke="#1f2937" stroke-width="1.6" stroke-dasharray="8,6" marker-end="url(#aO)"/>
+<text x="793" y="495" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827" font-style="italic">«use»</text>
+<rect x="50" y="50" width="628" height="542" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="50" y="50" width="628" height="42" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="364" y="78" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#111827">Main</text>
+<line x1="50" y1="204" x2="678" y2="204" stroke="#1f2937" stroke-width="1.8"/>
+<text x="66" y="118" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- scanner: Scanner {readOnly}</text>
+<text x="66" y="141" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- manager: OrderManager {readOnly}</text>
+<text x="66" y="164" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- RECEIPT_VALUE_WIDTH: int = 36 {readOnly}</text>
+<text x="66" y="187" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- RECEIPT_BORDER: String {readOnly}</text>
+<text x="66" y="230" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">+ main(args: String[]): void</text>
+<text x="66" y="253" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- enableUtf8Output(): void</text>
+<text x="66" y="276" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- printHeader(): void</text>
+<text x="66" y="299" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- handlePlaceOrder(): void</text>
+<text x="66" y="322" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- handleServeNextOrder(): void</text>
+<text x="66" y="345" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- handleSearchOrder(): void</text>
+<text x="66" y="368" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- handleViewPendingOrders(): void</text>
+<text x="66" y="391" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- handleViewCompletedOrdersSorted(): void</text>
+<text x="66" y="414" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- handleViewMenu(): void</text>
+<text x="66" y="437" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- printOrderTable(list: List&lt;Order&gt;, isPending: boolean): void</text>
+<text x="66" y="460" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- printReceiptRow(label: String, value: String): void</text>
+<text x="66" y="483" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- peso(amount: double): String</text>
+<text x="66" y="506" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- truncate(text: String, max: int): String</text>
+<text x="66" y="529" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- readLine(): String</text>
+<text x="66" y="552" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- readIntChoice(min: int, max: int): int</text>
+<text x="66" y="575" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve" text-decoration="underline">- confirm(question: String): boolean</text>
+<rect x="908" y="90" width="260" height="70" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="908" y="90" width="260" height="70" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1038" y="132" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#111827">OrderManager</text>
+<rect x="908" y="300" width="260" height="70" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="908" y="300" width="260" height="70" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1038" y="342" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#111827">Order</text>
+<rect x="908" y="470" width="260" height="70" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="908" y="470" width="260" height="70" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1038" y="512" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#111827">MenuItem</text>
+</svg>

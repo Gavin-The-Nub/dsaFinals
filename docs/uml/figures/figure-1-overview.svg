@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1540" height="850" viewBox="0 0 1540 850"><defs>
+<marker id="aO" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M1,1.5 L15,8 L1,14.5" fill="none" stroke="#1f2937" stroke-width="1.6"/></marker>
+<marker id="dF" viewBox="0 0 24 14" refX="23" refY="7" markerWidth="24" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M1,7 L12,1 L23,7 L12,13 Z" fill="#1f2937" stroke="#1f2937" stroke-width="1.2"/></marker>
+<marker id="dH" viewBox="0 0 24 14" refX="23" refY="7" markerWidth="24" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M1,7 L12,1 L23,7 L12,13 Z" fill="#ffffff" stroke="#1f2937" stroke-width="1.2"/></marker>
+</defs><rect width="1540" height="850" fill="#ffffff"/>
+<path d="M370,165 L600,165" fill="none" stroke="#1f2937" stroke-width="1.6" marker-start="url(#dF)" marker-end="url(#aO)"/>
+<text x="590" y="155" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">-manager</text>
+<text x="590" y="187" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">1</text>
+<path d="M880,165 L1110,165" fill="none" stroke="#1f2937" stroke-width="1.6" marker-start="url(#dH)" marker-end="url(#aO)"/>
+<text x="1100" y="155" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">-servedOrders</text>
+<text x="1100" y="187" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">0..*</text>
+<path d="M800,200 L800,540" fill="none" stroke="#1f2937" stroke-width="1.6" marker-start="url(#dF)" marker-end="url(#aO)"/>
+<text x="790" y="526" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">-pendingQueue</text>
+<text x="810" y="526" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">1</text>
+<path d="M650,200 L650,400 L270,400 L270,540" fill="none" stroke="#1f2937" stroke-width="1.6" marker-start="url(#dF)" marker-end="url(#aO)"/>
+<text x="260" y="526" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">-menu</text>
+<text x="280" y="526" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">0..*</text>
+<path d="M140,200 L140,540" fill="none" stroke="#1f2937" stroke-width="1.6" stroke-dasharray="8,6" marker-end="url(#aO)"/>
+<text x="152" y="420" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827" font-style="italic">«use»</text>
+<path d="M230,130 L230,70 L1250,70 L1250,130" fill="none" stroke="#1f2937" stroke-width="1.6" stroke-dasharray="8,6" marker-end="url(#aO)"/>
+<text x="740" y="60" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827" font-style="italic">«use»</text>
+<path d="M880,562 L1110,562" fill="none" stroke="#1f2937" stroke-width="1.6" marker-start="url(#dF)" marker-end="url(#aO)"/>
+<text x="1100" y="552" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">-front  0..1</text>
+<path d="M880,588 L1110,588" fill="none" stroke="#1f2937" stroke-width="1.6" marker-start="url(#dF)" marker-end="url(#aO)"/>
+<text x="1100" y="612" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">-rear  0..1</text>
+<path d="M1390,562 L1450,562 L1450,588 L1390,588" fill="none" stroke="#1f2937" stroke-width="1.6" marker-end="url(#aO)"/>
+<text x="1460" y="580" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">+next</text>
+<text x="1400" y="610" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">0..1</text>
+<path d="M1310,540 L1310,200" fill="none" stroke="#1f2937" stroke-width="1.6" marker-end="url(#aO)"/>
+<text x="1300" y="226" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">+data</text>
+<text x="1320" y="226" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827">1</text>
+<path d="M830,540 L830,450 L1170,450 L1170,200" fill="none" stroke="#1f2937" stroke-width="1.6" stroke-dasharray="8,6" marker-end="url(#aO)"/>
+<text x="1000" y="440" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#111827" font-style="italic">«use»</text>
+<rect x="90" y="130" width="280" height="70" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="90" y="130" width="280" height="70" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="230" y="172" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#111827">Main</text>
+<rect x="600" y="130" width="280" height="70" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="600" y="130" width="280" height="70" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="740" y="172" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#111827">OrderManager</text>
+<rect x="1110" y="130" width="280" height="70" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="1110" y="130" width="280" height="70" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1250" y="172" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#111827">Order</text>
+<rect x="90" y="540" width="280" height="70" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="90" y="540" width="280" height="70" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="230" y="582" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#111827">MenuItem</text>
+<rect x="600" y="540" width="280" height="70" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="600" y="540" width="280" height="70" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="740" y="582" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#111827">OrderQueue</text>
+<rect x="1110" y="540" width="280" height="70" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="1110" y="540" width="280" height="70" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1250" y="582" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#111827">OrderNode</text>
+<rect x="40" y="700" width="1460" height="120" fill="#f9fafb" stroke="#9ca3af"/>
+<path d="M70,738 L150,738" fill="none" stroke="#1f2937" stroke-width="1.6" marker-start="url(#dF)" marker-end="url(#aO)"/>
+<text x="165" y="743" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="16" fill="#111827">Composition: the whole creates and owns the part</text>
+<path d="M70,784 L150,784" fill="none" stroke="#1f2937" stroke-width="1.6" marker-start="url(#dH)" marker-end="url(#aO)"/>
+<text x="165" y="789" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="16" fill="#111827">Aggregation: the whole holds parts it did not create</text>
+<path d="M780,738 L860,738" fill="none" stroke="#1f2937" stroke-width="1.6" marker-end="url(#aO)"/>
+<text x="875" y="743" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="16" fill="#111827">Association: a field that refers to another class</text>
+<path d="M780,784 L860,784" fill="none" stroke="#1f2937" stroke-width="1.6" stroke-dasharray="8,6" marker-end="url(#aO)"/>
+<text x="875" y="789" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="16" fill="#111827">Dependency «use»: used as a parameter, return value or local variable</text>
+</svg>

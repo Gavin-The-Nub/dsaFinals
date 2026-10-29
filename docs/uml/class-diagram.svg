@@ -18,14 +18,14 @@
 <path d="M1264,300 L1410,300" fill="none" stroke="#1f2937" stroke-width="1.4" marker-start="url(#diamondHollow)" marker-end="url(#arrowOpen)"/>
 <text x="1402" y="292" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827">-servedOrders</text>
 <text x="1402" y="318" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827">0..*</text>
-<path d="M955.5,498 L955.5,640" fill="none" stroke="#1f2937" stroke-width="1.4" marker-start="url(#diamondFilled)" marker-end="url(#arrowOpen)"/>
+<path d="M955.5,516 L955.5,640" fill="none" stroke="#1f2937" stroke-width="1.4" marker-start="url(#diamondFilled)" marker-end="url(#arrowOpen)"/>
 <text x="947.5" y="628" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827">-pendingQueue</text>
 <text x="963.5" y="628" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827">1</text>
-<path d="M730,498 L730,575 L340,575 L340,640" fill="none" stroke="#1f2937" stroke-width="1.4" marker-start="url(#diamondFilled)" marker-end="url(#arrowOpen)"/>
+<path d="M730,516 L730,575 L340,575 L340,640" fill="none" stroke="#1f2937" stroke-width="1.4" marker-start="url(#diamondFilled)" marker-end="url(#arrowOpen)"/>
 <text x="332" y="628" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827">-menu</text>
 <text x="348" y="628" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827">0..*</text>
-<path d="M150,444 L150,640" fill="none" stroke="#1f2937" stroke-width="1.4" stroke-dasharray="7,5" marker-end="url(#arrowOpen)"/>
-<text x="160" y="546" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827" font-style="italic">«use»</text>
+<path d="M150,534 L150,640" fill="none" stroke="#1f2937" stroke-width="1.4" stroke-dasharray="7,5" marker-end="url(#arrowOpen)"/>
+<text x="160" y="591" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827" font-style="italic">«use»</text>
 <path d="M294,110 L294,80 L1594,80 L1594,110" fill="none" stroke="#1f2937" stroke-width="1.4" stroke-dasharray="7,5" marker-end="url(#arrowOpen)"/>
 <text x="944" y="73" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827" font-style="italic">«use»</text>
 <path d="M1500,700 L1500,534" fill="none" stroke="#1f2937" stroke-width="1.4" marker-end="url(#arrowOpen)"/>
@@ -42,26 +42,31 @@
 <text x="1668" y="803" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827">0..1</text>
 <path d="M1041,640 L1041,595 L1440,595 L1440,534" fill="none" stroke="#1f2937" stroke-width="1.4" stroke-dasharray="7,5" marker-end="url(#arrowOpen)"/>
 <text x="1240.5" y="588" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#111827" font-style="italic">«use»</text>
-<rect x="40" y="110" width="508" height="334" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+<rect x="40" y="110" width="508" height="424" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
 <rect x="40" y="110" width="508" height="32" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.5"/>
 <text x="294" y="131" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#111827">Main</text>
-<line x1="40" y1="194" x2="548" y2="194" stroke="#1f2937" stroke-width="1.5"/>
+<line x1="40" y1="230" x2="548" y2="230" stroke="#1f2937" stroke-width="1.5"/>
 <text x="52" y="163" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- scanner: Scanner {readOnly}</text>
 <text x="52" y="181" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- manager: OrderManager {readOnly}</text>
-<text x="52" y="215" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">+ main(args: String[]): void</text>
-<text x="52" y="233" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- printHeader(): void</text>
-<text x="52" y="251" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handlePlaceOrder(): void</text>
-<text x="52" y="269" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handleServeNextOrder(): void</text>
-<text x="52" y="287" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handleSearchOrder(): void</text>
-<text x="52" y="305" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handleViewPendingOrders(): void</text>
-<text x="52" y="323" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handleViewCompletedOrdersSorted(): void</text>
-<text x="52" y="341" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handleViewMenu(): void</text>
-<text x="52" y="359" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- printOrderTable(list: List&lt;Order&gt;, isPending: boolean): void</text>
-<text x="52" y="377" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- truncate(text: String, max: int): String</text>
-<text x="52" y="395" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- readLine(): String</text>
-<text x="52" y="413" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- readIntChoice(min: int, max: int): int</text>
-<text x="52" y="431" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- confirm(question: String): boolean</text>
-<rect x="670" y="110" width="594" height="388" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+<text x="52" y="199" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- RECEIPT_VALUE_WIDTH: int = 36 {readOnly}</text>
+<text x="52" y="217" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- RECEIPT_BORDER: String {readOnly}</text>
+<text x="52" y="251" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">+ main(args: String[]): void</text>
+<text x="52" y="269" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- enableUtf8Output(): void</text>
+<text x="52" y="287" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- printHeader(): void</text>
+<text x="52" y="305" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handlePlaceOrder(): void</text>
+<text x="52" y="323" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handleServeNextOrder(): void</text>
+<text x="52" y="341" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handleSearchOrder(): void</text>
+<text x="52" y="359" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handleViewPendingOrders(): void</text>
+<text x="52" y="377" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handleViewCompletedOrdersSorted(): void</text>
+<text x="52" y="395" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- handleViewMenu(): void</text>
+<text x="52" y="413" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- printOrderTable(list: List&lt;Order&gt;, isPending: boolean): void</text>
+<text x="52" y="431" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- printReceiptRow(label: String, value: String): void</text>
+<text x="52" y="449" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- peso(amount: double): String</text>
+<text x="52" y="467" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- truncate(text: String, max: int): String</text>
+<text x="52" y="485" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- readLine(): String</text>
+<text x="52" y="503" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- readIntChoice(min: int, max: int): int</text>
+<text x="52" y="521" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">- confirm(question: String): boolean</text>
+<rect x="670" y="110" width="594" height="406" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
 <rect x="670" y="110" width="594" height="32" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.5"/>
 <text x="967" y="131" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#111827">OrderManager</text>
 <line x1="670" y1="284" x2="1264" y2="284" stroke="#1f2937" stroke-width="1.5"/>
@@ -76,13 +81,14 @@
 <text x="682" y="323" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">- initializeMenu(): void</text>
 <text x="682" y="341" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ getMenu(): List&lt;MenuItem&gt;</text>
 <text x="682" y="359" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ getMenuItemById(id: int): MenuItem</text>
-<text x="682" y="377" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ placeOrder(customerName: String, menuItemId: int, quantity: int): Order</text>
-<text x="682" y="395" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ peekNextOrder(): Order</text>
-<text x="682" y="413" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ serveNextOrder(): Order</text>
-<text x="682" y="431" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ linearSearchOrder(orderId: int): Order</text>
-<text x="682" y="449" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ getPendingOrders(): List&lt;Order&gt;</text>
-<text x="682" y="467" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ getServedOrdersSortedByAmount(descending: boolean): List&lt;Order&gt;</text>
-<text x="682" y="485" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ getServedOrders(): List&lt;Order&gt;</text>
+<text x="682" y="377" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve" text-decoration="underline">+ isValidCustomerName(customerName: String): boolean</text>
+<text x="682" y="395" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ placeOrder(customerName: String, menuItemId: int, quantity: int): Order</text>
+<text x="682" y="413" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ peekNextOrder(): Order</text>
+<text x="682" y="431" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ serveNextOrder(): Order</text>
+<text x="682" y="449" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ linearSearchOrder(orderId: int): Order</text>
+<text x="682" y="467" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ getPendingOrders(): List&lt;Order&gt;</text>
+<text x="682" y="485" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ getServedOrdersSortedByAmount(descending: boolean): List&lt;Order&gt;</text>
+<text x="682" y="503" font-family="Consolas, 'Courier New', monospace" font-size="13" fill="#111827" xml:space="preserve">+ getServedOrders(): List&lt;Order&gt;</text>
 <rect x="1410" y="110" width="368" height="424" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
 <rect x="1410" y="110" width="368" height="32" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.5"/>
 <text x="1594" y="131" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#111827">Order</text>

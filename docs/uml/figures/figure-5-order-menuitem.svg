@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1188" height="642" viewBox="0 0 1188 642"><defs>
+<marker id="aO" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M1,1.5 L15,8 L1,14.5" fill="none" stroke="#1f2937" stroke-width="1.6"/></marker>
+<marker id="dF" viewBox="0 0 24 14" refX="23" refY="7" markerWidth="24" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M1,7 L12,1 L23,7 L12,13 Z" fill="#1f2937" stroke="#1f2937" stroke-width="1.2"/></marker>
+<marker id="dH" viewBox="0 0 24 14" refX="23" refY="7" markerWidth="24" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M1,7 L12,1 L23,7 L12,13 Z" fill="#ffffff" stroke="#1f2937" stroke-width="1.2"/></marker>
+</defs><rect width="1188" height="642" fill="#ffffff"/>
+<path d="M645,406 L1112,406 L1138,432 L1138,566 L645,566 Z" fill="#fffbea" stroke="#1f2937" stroke-width="1.6"/>
+<path d="M1112,406 L1112,432 L1138,432" fill="none" stroke="#1f2937" stroke-width="1.6"/>
+<text x="663" y="440" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="17" fill="#111827">Note: Order does not keep a reference to</text>
+<text x="663" y="465" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="17" fill="#111827">MenuItem. placeOrder() copies the item’s</text>
+<text x="663" y="490" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="17" fill="#111827">name into itemName and stores</text>
+<text x="663" y="515" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="17" fill="#111827">totalAmount = price × quantity, so</text>
+<text x="663" y="540" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="17" fill="#111827">there is no line between the two classes.</text>
+<path d="M645,486 L505,486" fill="none" stroke="#1f2937" stroke-width="1.6" stroke-dasharray="8,6"/>
+<path d="M891.5,406 L891.5,316" fill="none" stroke="#1f2937" stroke-width="1.6" stroke-dasharray="8,6"/>
+<rect x="50" y="50" width="455" height="542" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="50" y="50" width="455" height="42" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="277.5" y="78" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#111827">Order</text>
+<line x1="50" y1="273" x2="505" y2="273" stroke="#1f2937" stroke-width="1.8"/>
+<text x="66" y="118" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">- orderId: int {readOnly}</text>
+<text x="66" y="141" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">- customerName: String {readOnly}</text>
+<text x="66" y="164" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">- itemName: String {readOnly}</text>
+<text x="66" y="187" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">- quantity: int {readOnly}</text>
+<text x="66" y="210" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">- totalAmount: double {readOnly}</text>
+<text x="66" y="233" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">- status: String</text>
+<text x="66" y="256" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">- timestamp: String {readOnly}</text>
+<text x="66" y="299" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ Order(orderId: int, customerName: String,</text>
+<text x="66" y="322" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">        itemName: String, quantity: int,</text>
+<text x="66" y="345" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">        totalAmount: double, status: String,</text>
+<text x="66" y="368" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">        timestamp: String)</text>
+<text x="66" y="391" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ getOrderId(): int</text>
+<text x="66" y="414" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ getCustomerName(): String</text>
+<text x="66" y="437" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ getItemName(): String</text>
+<text x="66" y="460" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ getQuantity(): int</text>
+<text x="66" y="483" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ getTotalAmount(): double</text>
+<text x="66" y="506" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ getStatus(): String</text>
+<text x="66" y="529" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ setStatus(status: String): void</text>
+<text x="66" y="552" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ getTimestamp(): String</text>
+<text x="66" y="575" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ toString(): String</text>
+<rect x="645" y="50" width="493" height="266" fill="#ffffff" stroke="#1f2937" stroke-width="1.8"/>
+<rect x="645" y="50" width="493" height="42" fill="#dbe7f5" stroke="#1f2937" stroke-width="1.8"/>
+<text x="891.5" y="78" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#111827">MenuItem</text>
+<line x1="645" y1="181" x2="1138" y2="181" stroke="#1f2937" stroke-width="1.8"/>
+<text x="661" y="118" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">- id: int {readOnly}</text>
+<text x="661" y="141" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">- name: String {readOnly}</text>
+<text x="661" y="164" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">- price: double {readOnly}</text>
+<text x="661" y="207" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ MenuItem(id: int, name: String, price: double)</text>
+<text x="661" y="230" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ getId(): int</text>
+<text x="661" y="253" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ getName(): String</text>
+<text x="661" y="276" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ getPrice(): double</text>
+<text x="661" y="299" font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#111827" xml:space="preserve">+ toString(): String</text>
+</svg>

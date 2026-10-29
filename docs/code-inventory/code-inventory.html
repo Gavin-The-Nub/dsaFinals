@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Code Inventory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  @page { size: 8.5in 11in; margin: 0; }
+  :root { --maroon: #8e1414; --bar: #9b1111; --ink: #111111; --rule: #2b2b2b; --muted: #6b6b6b; }
+  html, body { margin: 0; padding: 0; background: #e9e9e9; }
+  body { font-family: 'Work Sans', 'Segoe UI', Arial, sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  #pages { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 24px 0; }
+  .page { width: 816px; height: 1056px; background: #ffffff; position: relative; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.15); break-after: page; }
+  .page .bar { position: absolute; left: 0; top: 42px; width: 40px; height: 128px; background: var(--bar); }
+  .page .content { position: absolute; left: 82px; right: 66px; top: 56px; bottom: 64px; overflow: hidden; }
+  h1 { font-family: 'Archivo Black', 'Arial Black', sans-serif; color: var(--maroon); font-size: 44px; line-height: 1.05; margin: 0 0 14px; letter-spacing: .5px; }
+  h2 { font-family: 'Archivo Black', 'Arial Black', sans-serif; font-size: 22px; line-height: 1.15; margin: 18px 0 8px; letter-spacing: .3px; }
+  .sub { font-size: 13.5px; margin: 6px 0 6px; }
+  .sub b { font-style: italic; }
+  .para { font-size: 13px; line-height: 1.5; margin: 6px 0 10px; text-align: justify; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.2px; line-height: 1.38; margin: 4px 0 0; table-layout: fixed; }
+  thead th { background: var(--maroon); color: #fff; text-align: left; font-weight: 700; padding: 7px 10px; font-size: 12.6px; }
+  tbody td { padding: 7px 10px; border-bottom: 1.6px solid var(--rule); vertical-align: middle; overflow-wrap: anywhere; }
+  tbody td:first-child { font-weight: 700; }
+  td code, .para code { font-family: Consolas, 'Courier New', monospace; font-size: 11.6px; }
+  .caption { text-align: right; font-style: italic; color: var(--muted); font-size: 12px; margin: 6px 0 14px; }
+  @media print { html, body { background: #fff; } #pages { padding: 0; gap: 0; } .page { box-shadow: none; } }
+  body.solo #pages { padding: 0; gap: 0; } body.solo .page { box-shadow: none; } body.solo { background: #fff; }
+</style>
+</head>
+<body>
+<div id="pages"></div>
+<script src="inventory-data.js"></script>
+<script>
+// Lays the blocks out on fixed Letter-size pages, splitting long tables and repeating their header row.
+function paginate(blocks) {
+  const root = document.getElementById('pages');
+  let content;
+  const newPage = () => {
+    const p = document.createElement('div'); p.className = 'page';
+    p.innerHTML = '<div class="bar"></div><div class="content"></div>';
+    root.appendChild(p); content = p.querySelector('.content');
+  };
+  const overflow = () => content.scrollHeight > content.clientHeight + 1;
+  const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; e.innerHTML = html; return e; };
+  newPage();
+  let held = [];                       // headings waiting to be kept together with the next table
+  for (const b of blocks) {
+    if (b.type === 'pagebreak') { held = []; newPage(); continue; }
+    if (b.type === 'h1' || b.type === 'h2' || b.type === 'sub') {
+      const e = el(b.type === 'sub' ? 'div' : b.type, b.type === 'sub' ? 'sub' : '', b.html);
+      content.appendChild(e);
+      if (overflow()) { content.removeChild(e); held.forEach(h => content.removeChild(h)); newPage(); held.forEach(h => content.appendChild(h)); content.appendChild(e); }
+      held.push(e); continue;
+    }
+    if (b.type === 'para') {
+      const e = el('div', 'para', b.html); content.appendChild(e);
+      if (overflow()) { content.removeChild(e); held.forEach(h => content.removeChild(h)); newPage(); held.forEach(h => content.appendChild(h)); content.appendChild(e); }
+      held = []; continue;
+    }
+    if (b.type === 'table') {
+      const makePart = () => {
+        const t = document.createElement('table');
+        t.innerHTML = '<colgroup>' + b.widths.map(w => `<col style="width:${w}%">`).join('') + '</colgroup><thead><tr>' + b.cols.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody></tbody>';
+        content.appendChild(t); return t;
+      };
+      let t = makePart(), body = t.querySelector('tbody'), rowsInPart = 0, firstPart = true;
+      for (const r of b.rows) {
+        const tr = document.createElement('tr'); tr.innerHTML = r.map(c => `<td>${c}</td>`).join('');
+        body.appendChild(tr);
+        if (overflow()) {
+          body.removeChild(tr);
+          if (rowsInPart === 0 || (firstPart && rowsInPart < 2)) {   // too few rows fit: move the headings and the whole table to a new page
+            const moved = [...body.children]; moved.push(tr);
+            content.removeChild(t); held.forEach(h => content.removeChild(h));
+            newPage(); held.forEach(h => content.appendChild(h));
+            t = makePart(); body = t.querySelector('tbody'); rowsInPart = 0;
+            for (const r of moved) { body.appendChild(r); rowsInPart++; }
+            firstPart = false;
+            continue;
+          } else {
+            // add the "(continued)" caption; if it does not fit, carry rows over until it does
+            const carry = [tr];
+            const cont = el('div', 'caption', b.caption + ' (continued)');
+            content.appendChild(cont);
+            while (overflow() && body.children.length > 1) { content.removeChild(cont); carry.unshift(body.lastElementChild); body.removeChild(body.lastElementChild); content.appendChild(cont); }
+            newPage(); firstPart = false;
+            t = makePart(); body = t.querySelector('tbody'); rowsInPart = 0;
+            for (const r of carry) { body.appendChild(r); rowsInPart++; }
+            continue;
+          }
+        }
+        rowsInPart++;
+      }
+      const cap = el('div', 'caption', b.caption); content.appendChild(cap);
+      if (overflow()) {                     // caption does not fit: carry the last row over with it
+        content.removeChild(cap);
+        const carry = [body.lastElementChild]; body.removeChild(body.lastElementChild);
+        const cont = el('div', 'caption', b.caption + ' (continued)'); content.appendChild(cont);
+        while (overflow() && body.children.length > 1) { content.removeChild(cont); carry.unshift(body.lastElementChild); body.removeChild(body.lastElementChild); content.appendChild(cont); }
+        newPage(); t = makePart(); for (const r of carry) t.querySelector('tbody').appendChild(r); content.appendChild(cap);
+      }
+      held = []; continue;
+    }
+  }
+  // report pages that still overflow (for checking)
+  document.body.dataset.pages = root.children.length;
+  document.body.dataset.overflow = [...root.children].map((p, i) => { const c = p.querySelector('.content'); return c.scrollHeight > c.clientHeight + 1 ? i + 1 : null; }).filter(Boolean).join(',');
+  document.body.dataset.wide = [...document.querySelectorAll('td')].filter(td => td.scrollWidth > td.clientWidth + 1).map(td => td.textContent.slice(0, 40)).join(' | ');
+  const m = location.hash.match(/solo=(\d+)/);
+  if (m) { document.body.classList.add('solo'); [...root.children].forEach((p, i) => { if (i + 1 !== +m[1]) p.style.display = 'none'; }); }
+  document.body.dataset.ready = '1';
+}
+document.fonts.ready.then(() => paginate(INVENTORY));
+</script>
+</body>
+</html>
